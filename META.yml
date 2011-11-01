@@ -3,6 +3,7 @@ abstract: 'The do-this-then-do-that utility'
 author:
   - 'Tomoki Aonuma <uasi@cpan.org>'
 build_requires:
+  AE: 0
   ExtUtils::MakeMaker: 6.57
   Test::More: 0
 configure_requires:
@@ -21,7 +22,7 @@ no_index:
     - t
 requires:
   parent: 0
-  perl: 5.8.901
+  perl: 5.8.9
 resources:
   license: http://dev.perl.org/licenses/
 version: 0.01

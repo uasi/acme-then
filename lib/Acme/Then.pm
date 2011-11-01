@@ -42,7 +42,8 @@ sub done {
 sub _call_each {
     my ($code_list, @args) = @_;
     while (@$code_list) {
-        @args = _call($code_list, @args);
+        _call($code_list, @args);
+        @args = ();
     }
     _ACME_THEN_LAST:
 }
@@ -50,7 +51,7 @@ sub _call_each {
 sub _call {
     my ($code_list, @args) = @_;
 
-    return @args unless @$code_list;
+    return unless @$code_list;
 
     my $code = shift @$code_list;
     local $_NEXTCALL = 0;
@@ -58,7 +59,7 @@ sub _call {
         _call_each($code_list, @_);
     };
     $code->(@args);
-    return;
+    goto _ACME_THEN_LAST if $_NEXTCALL;
 }
 
 1;

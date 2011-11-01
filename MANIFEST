@@ -14,3 +14,4 @@ META.yml
 README
 t/00-compile.t
 t/01-basic.t
+t/02-any-event.t
