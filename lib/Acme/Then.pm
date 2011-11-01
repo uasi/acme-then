@@ -85,27 +85,15 @@ To install this module, run the following commands:
 =head1 SYNOPSIS
 
     Acme::Then::do {
-        print '1';
+        ...
     } then {
-        print '2';
+        ...
+        LAST if ...;
     } then {
-        print '3';
-    } done; # => 123
+        ...
+    } done;
 
-    Acme::Then::do {
-        print '1';
-    } then {
-        print '2';
-        return LAST;
-    } then {
-        print '3';
-    } done; # => 12
-
-    sub do_something {
-        my (undef, $cb) = @_;
-        say 'doing something';
-        $cb->('did something');
-    }
+You can turn a callback chain
 
     do_something(cb => sub {
         do_something(cb => sub {
@@ -116,7 +104,7 @@ To install this module, run the following commands:
         });
     });
 
-    # Turns into
+into
 
     Acme::Then::do {
         do_something(cb => NEXT);
@@ -128,6 +116,34 @@ To install this module, run the following commands:
         my ($res) = @_;
         say $res;
     } done;
+
+=head1 DESCRIPTION
+
+Do this, then do that.
+
+=head1 FUNCTIONS
+
+=head2 do
+
+B<do> {} then {} done;
+
+=head2 then
+
+do {} B<then> {} done;
+
+=head2 done
+
+do {} then {} B<done>;
+
+=head2 LAST
+
+Exits from a do-then-done construct.
+
+=head2 NEXT
+
+Returns a coderef. The arguments to the coderef are set to
+the next block's @_. The coderef should not be called more than once
+within the same block.
 
 =head1 AUTHOR
 
