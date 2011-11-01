@@ -2,19 +2,18 @@ package Acme::Then;
 use parent 'Exporter';
 our $VERSION = '0.01';
 
-use 5.008009_01;
+use 5.008009;
 use strict;
 use warnings;
 use Carp;
 
 our @EXPORT = qw(LAST NEXT then done);
 
-our $_LAST;
 our $_NEXT;
 our $_NEXTCALL;
 
 sub LAST {
-    $_LAST = 1;
+    goto _ACME_THEN_LAST;
 }
 
 sub NEXT {
@@ -27,8 +26,6 @@ sub NEXT {
 sub do (&$) {
     my ($code, $code_list) = @_;
     unshift @$code_list, $code;
-    local $_LAST;
-    local $_NEXT;
     _call_each($code_list);
 }
 
@@ -46,8 +43,8 @@ sub _call_each {
     my ($code_list, @args) = @_;
     while (@$code_list) {
         @args = _call($code_list, @args);
-        last if $_LAST;
     }
+    _ACME_THEN_LAST:
 }
 
 sub _call {
