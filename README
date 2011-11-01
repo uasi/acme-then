@@ -1,0 +1,64 @@
+NAME
+    Acme::Then - The do-this-then-do-that utility
+
+INSTALLATION
+    To install this module, run the following commands:
+
+        perl Makefile.PL
+        make
+        make test
+        make install
+
+SYNOPSIS
+        Acme::Then::do {
+            print '1';
+        } then {
+            print '2';
+        } then {
+            print '3';
+        } done; # => 123
+
+        Acme::Then::do {
+            print '1';
+        } then {
+            print '2';
+            return LAST;
+        } then {
+            print '3';
+        } done; # => 12
+
+        sub do_something {
+            my (undef, $cb) = @_;
+            say 'doing something';
+            $cb->('did something');
+        }
+
+        do_something(cb => sub {
+            do_something(cb => sub {
+                do_something(cb => sub {
+                    my ($res) = @_;
+                    say $res;
+                });
+            });
+        });
+
+        # Turns into
+
+        Acme::Then::do {
+            do_something(cb => NEXT);
+        } then {
+            do_something(cb => NEXT);
+        } then {
+            do_something(cb => NEXT);
+        } then {
+            my ($res) = @_;
+            say $res;
+        } done;
+
+AUTHOR
+    Tomoki Aonuma <uasi@cpan.org>
+
+LICENSE
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
