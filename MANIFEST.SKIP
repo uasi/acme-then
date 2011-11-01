@@ -1,6 +1,7 @@
 \.git/
 ^blib/
 ~$
+\.bak$
 \.gitignore$
 \.gz$
 \.old$
