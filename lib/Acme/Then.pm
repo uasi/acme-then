@@ -7,7 +7,7 @@ use strict;
 use warnings;
 use Carp;
 
-our @EXPORT = qw(LAST NEXT then done);
+our @EXPORT = qw(LAST NEXT then);
 
 our $_NEXT;
 our $_NEXTCALL;
@@ -23,20 +23,17 @@ sub NEXT {
     $_NEXT;
 }
 
-sub do (&$) {
+sub do (&;$) {
     my ($code, $code_list) = @_;
+    $code_list ||= [];
     unshift @$code_list, $code;
     _call_each($code_list);
 }
 
-sub then (&$) {
+sub then (&;$) {
     my ($code, $code_list) = @_;
     unshift @$code_list, $code;
     $code_list;
-}
-
-sub done {
-    [sub {}];
 }
 
 sub _call_each {
@@ -92,7 +89,7 @@ To install this module, run the following commands:
         LAST if ...;
     } then {
         ...
-    } done;
+    };
 
 You can turn a callback chain
 
@@ -116,7 +113,7 @@ into
     } then {
         my ($res) = @_;
         say $res;
-    } done;
+    };
 
 =head1 DESCRIPTION
 
@@ -126,19 +123,17 @@ Do this, then do that.
 
 =head2 do
 
-C<do> {} then {} done;
+C<do> {} then {};
 
 =head2 then
 
-do {} C<then> {} done;
+do {} C<then> {};
 
-=head2 done
-
-do {} then {} C<done>;
+do {} then {};
 
 =head2 LAST
 
-Exits from a do-then-done construct.
+Exits from a do-then construct.
 
 =head2 NEXT
 

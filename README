@@ -17,7 +17,7 @@ SYNOPSIS
             LAST if ...;
         } then {
             ...
-        } done;
+        };
 
     You can turn a callback chain
 
@@ -41,23 +41,22 @@ SYNOPSIS
         } then {
             my ($res) = @_;
             say $res;
-        } done;
+        };
 
 DESCRIPTION
     Do this, then do that.
 
 FUNCTIONS
   do
-    `do' {} then {} done;
+    `do' {} then {};
 
   then
-    do {} `then' {} done;
+    do {} `then' {};
 
-  done
-    do {} then {} `done';
+    do {} then {};
 
   LAST
-    Exits from a do-then-done construct.
+    Exits from a do-then construct.
 
   NEXT
     Returns a coderef. The arguments to the coderef are set to the next

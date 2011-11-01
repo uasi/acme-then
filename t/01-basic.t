@@ -12,7 +12,7 @@ use Acme::Then;
         push @values, 2;
     } then {
         push @values, 3;
-    } done;
+    };
 
     is_deeply \@values, [1, 2, 3], 'do-then-done';
 }
@@ -26,7 +26,7 @@ use Acme::Then;
         return LAST;
     } then {
         push @values, 3;
-    } done;
+    };
 
     is_deeply \@values, [1, 2], 'LAST';
 }
@@ -40,10 +40,10 @@ use Acme::Then;
             return LAST;
         } then {
             push @values, 'X';
-        } done;
+        };
     } then {
         push @values, 3;
-    } done;
+    };
 
     is_deeply \@values, [1, 2, 3], 'nested do-then-done';
 }
@@ -67,7 +67,7 @@ use Acme::Then;
     } then {
         my ($res) = @_;
         push @responses, $res;
-    } done;
+    };
 
     is_deeply \@values, [1, 2], 'NEXT';
     is_deeply \@responses, ['res 1', 'res 2'], 'NEXT';

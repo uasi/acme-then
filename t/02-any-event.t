@@ -15,7 +15,7 @@ use AE;
     } then {
         push @values, 4;
         $cv->send;
-    } done;
+    };
 
     push @values, 3;
     $cv->recv;
