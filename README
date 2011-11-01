@@ -48,20 +48,20 @@ DESCRIPTION
 
 FUNCTIONS
   do
-    do {} then {} done;
+    `do' {} then {} done;
 
   then
-    do {} then {} done;
+    do {} `then' {} done;
 
   done
-    do {} then {} done;
+    do {} then {} `done';
 
   LAST
     Exits from a do-then-done construct.
 
   NEXT
     Returns a coderef. The arguments to the coderef are set to the next
-    block's @_. The coderef should not be called more than once within the
+    block's `@_'. The coderef should not be called more than once within the
     same block.
 
 AUTHOR

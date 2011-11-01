@@ -125,15 +125,15 @@ Do this, then do that.
 
 =head2 do
 
-B<do> {} then {} done;
+C<do> {} then {} done;
 
 =head2 then
 
-do {} B<then> {} done;
+do {} C<then> {} done;
 
 =head2 done
 
-do {} then {} B<done>;
+do {} then {} C<done>;
 
 =head2 LAST
 
@@ -142,7 +142,7 @@ Exits from a do-then-done construct.
 =head2 NEXT
 
 Returns a coderef. The arguments to the coderef are set to
-the next block's @_. The coderef should not be called more than once
+the next block's C<@_>. The coderef should not be called more than once
 within the same block.
 
 =head1 AUTHOR
