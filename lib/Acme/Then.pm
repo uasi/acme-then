@@ -129,8 +129,6 @@ C<do> {} then {};
 
 do {} C<then> {};
 
-do {} then {};
-
 =head2 LAST
 
 Exits from a do-then construct.

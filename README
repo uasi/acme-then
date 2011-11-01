@@ -53,8 +53,6 @@ FUNCTIONS
   then
     do {} `then' {};
 
-    do {} then {};
-
   LAST
     Exits from a do-then construct.
 
